@@ -6,3 +6,4 @@
 | asynchronous flush          | 异步刷盘  | 非同期flush      |
 | synchronous replication     | 同步复制  | 同期レプリケーション    |
 | asynchronous replication    | 异步复制  | 非同期レプリケーション   |
+| Long Polling                | 长轮询   | Long polling  |
