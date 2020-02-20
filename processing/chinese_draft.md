@@ -64,5 +64,9 @@ Kafka在日志领域有着很高的成熟度。
 
 ## 文献参照
 
-[RocketMQ与kafka对比（18项差异）](http://jm.taobao.org/2016/03/24/rmq-vs-kafka/)
-[技术选型：RocketMQ or Kafka](https://zhuanlan.zhihu.com/p/60196818)
+* [RocketMQ与kafka对比（18项差异）](http://jm.taobao.org/2016/03/24/rmq-vs-kafka/)
+* [技术选型：RocketMQ or Kafka](https://zhuanlan.zhihu.com/p/60196818)
+* [Apache Kafkaに入門した](https://deeeet.com/writing/2015/09/01/apache-kafka/)
+* [解决KafKa数据存储与顺序一致性保证](https://www.cnblogs.com/sunsky303/p/9511839.html)
+* [Kafka : Ordering Guarantees](https://medium.com/@felipedutratine/kafka-ordering-guarantees-99320db8f87f)
+* [Apache Kafka 从 0.7 到 1.0：那些年我们踩过的坑](https://www.infoq.cn/article/MLMyoWNxqs*MzQX7lvzO)
