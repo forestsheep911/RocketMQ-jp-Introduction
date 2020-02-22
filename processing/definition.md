@@ -4,6 +4,8 @@
 
 [消息中间件](https://baike.baidu.com/item/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6)
 
+[Message queue](https://en.wikipedia.org/wiki/Message_queue)
+
 [synchronous replication](https://searchdisasterrecovery.techtarget.com/definition/synchronous-replication)
 
 [asynchronous replication](https://searchdatabackup.techtarget.com/definition/asynchronous-replication)
