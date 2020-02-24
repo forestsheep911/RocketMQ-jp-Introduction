@@ -1,56 +1,19 @@
-# RocketMQ 介绍
+# Apache RocketMQ 介绍
 
 ## 概要
-Apache RocketMQ is a distributed messaging and streaming platform with low latency, high performance and reliability, trillion-level capacity and flexible scalability.
+Apache RocketMQ是一个分布式消息传递和流媒体平台，具有低延迟，高性能和可靠性，万亿级容量和灵活的可伸缩性。它的一个重要特性是支持非日志类型的可靠消息传送，非常适合运用在金融和电子商务领域。目前他是Apache社区的顶级项目，在全球有超过100家公司在其业务中使用RocketMQ的开源版本。
 
-RocketMQ最初由阿里根据自身需求而打造，后捐献给了Apache。经过社区的发展成为了Apache的顶级项目。
+## 诞生
+RocketMQ起源于阿里巴巴。阿里巴巴最初由于业务需求，需要使用消息中间件。早期使用过Notify，ActiveMQ等。但在需求不断膨胀的情况下，ActiveMQ IO模块遇到了瓶颈，几经努力但改善成果不佳。这时正值Kafka流行，于是引起了阿里巴巴开发团队的注意，对kafka的无限消息堆积，高效持久化速度等特性非常赞赏。但不幸的是，Kafka不能满足他们的要求，特别是在低延迟和高可靠性方面。在这种情况下，阿里巴巴决定发明一个新的消息传递引擎来处理更广泛的用例集，从传统的发布/订阅方案到大批量实时零损失容忍交易系统。
 
-~~RocketMQ是由阿里开发的消息中间件，开发灵感受到了Kafka的影响，吸取了很多Kafka的优点，并根据自身需求进行了改造和优化。RocketMQ的一个重要特性是支持非日志类型的可靠消息传送。目前广泛应用于阿里集团下各类产品中，在订单，交易，充值，流计算，消息推送等场景中起到了重要作用。~~
+## 里程碑
+2012年，阿里巴巴开始开发RocketMQ，经历了数次双11核心交易链路检验。
 
-## RocketMQ开发动机
-根据我们的研究，在使用越来越多的队列和虚拟主题的情况下，ActiveMQ IO模块遇到了瓶颈。我们尽力通过节流，断路器或降级来解决此问题，但效果不佳。因此，我们那时开始关注流行的消息传递解决方案Kafka。不幸的是，Kafka不能满足我们的要求，特别是在低延迟和高可靠性方面，请参阅此处以了解详细信息。
+2016年11月11日，Rocket又一次在阿里巴巴全球购物节上处理了1.2万亿个并发在线消息传输，随后阿里巴巴将RocketMQ捐献给Apache Incubator。
 
-在这种情况下，我们决定发明一个新的消息传递引擎来处理更广泛的用例集，从传统的发布/订阅方案到大批量实时零损失容忍交易系统。
+2017年9月25日 – Apache软件基金会，连同350多个开源项目的全体志愿者、开发人员、管理人员、和孵化项目组织，宣布Apache®RocketMQ™从Apache孵化器毕业成为顶级项目，这表明该项目的社区和产品已根据ASF的精英流程和原则得到了很好的管理。[参见](https://blogs.apache.org/foundation/entry/the-apache-software-foundation-announces18)
 
-## 为什么选择RocketMQ？
-RocketMQ具有低延迟，高性能，为电商金融领域添加了可靠重试、基于文件存储的分布式事务等特性，并做了大量优化。从2012年开始，经历了历次双11核心交易链路检验。2016年11月，阿里将RocketMQ捐献给Apache软件基金后，又经历数代社区发展壮大，在各项性能上又有很大提升，如今已成为Apache的顶级项目。现在，有超过100家公司在他们的业务中使用开源版的RocketMQ。
-
-~~阿里集团下的淘宝原先就使用自己开发的Notify消息中间件，使用的是Mysql作为存储手段，但希望进一步优化存储部分。2011年初，Linkin开源了Kafka这个优秀的消息中间件，淘宝中间件团队在对Kafka做过充分Review之后，认为Kafka的无限消息堆积，高效持久化速度等特性非常优秀。但另一方面，Kafka主要定位于日志传输，但淘宝最常用的是和交易相关的一系列对事务完整性要求很高的业务。Kafka并不擅长这方面，所以阿里决定重新用Java编写一套新的中间件，命名为RocketMQ。~~
-
-~~对于Kafka无法照搬和开发新中间件的具体考量如下：
-* Kafka的业务应用场景主要定位于日志传输；对于复杂业务支持不够。
-* 阿里很多业务场景对数据可靠性、数据实时性、消息队列的个数等方面的要求很高。
-* Kafka针对海量数据，但是对数据的正确度要求不是十分严格。而阿里巴巴中用于交易相关的事情较多，对数据的正确性要求极高，Kafka不合适。~~
-* ~~当业务成长到一定规模，采用开源方案的技术成本会变高.~~
-* ~~开源方案无法满足业务的需要；旧版本、自开发代码与新版本的兼容都可能是问题；运维角度，Kafka使用 scala 编写，而阿里是java系。Kafka的后续维护是个问题。~~
-* ~~阿里在团队、成本、资源投入等方面约束性条件几乎没有。~~
-
-## 开源
-~~这些年开源氛围越来越好，各大IT公司都纷纷将一些自研代码开源出来。2012年，阿里巴巴开源其自研的第三代分布式消息中间件——RocketMQ。经过几年的技术打磨，阿里称基于RocketMQ技术，目前双十一当天消息容量可达到万亿级。
-2016年11月，阿里将RocketMQ捐献给Apache软件基金会，正式成为孵化项目。~~
-
-RocketMQ于2012年起源于阿里巴巴，在11月11日阿里巴巴全球购物节上处理了1.2万亿个并发在线消息传输后，于2016年11月捐赠给Apache Incubator。ApacheRocketMQ v4.0.0于2017年2月发布。
-
-Forest Hill, MD –25 September 2017– The Apache Software Foundation (ASF), the all-volunteer developers, stewards, and incubators of more than 350 Open Source projects and initiatives, announced today that Apache® RocketMQ™ has graduated from the Apache Incubator to become a Top-Level Project (TLP), signifying that the project's community and products have been well-governed under the ASF's meritocratic process and principles.
-
- 2017年9月25日 – Apache软件基金会（ASF）是350多个开源项目和计划的全志愿者开发人员，管理人员和孵化器，宣布Apache®RocketMQ™从Apache孵化器毕业成为顶级项目（TLP），这表明该项目的社区和产品已根据ASF的精英流程和原则得到了很好的管理。
- 
-此条新闻具体参见：
-[The Apache Software Foundation Announces Apache® RocketMQ™ as a Top-Level Project](https://blogs.apache.org/foundation/entry/the-apache-software-foundation-announces18)
- 
->目前国内外有很多公司会把一些通用问题的解决方案，尤其是那些久经考验、愈久弥坚的产品开源出来，以期望在品牌宣传、人才引进方面有所建树。把RocketMQ开源出来，甚至捐赠给Apache，内部也是经过了深思熟虑，层层审批与讨论，期望能够在生态化、规范化、国际化、商业化方面深耕细作。
-
->开源捐赠的想法实际上始于2014年。当时，我们甄选了几位Apache社区权威人士，遗憾的是反复沟通不断修改草案之后突然间失去了联系。2015年，我们有幸结识了Kylin Principal Architect蒋旭和VP Luke以及RedHat Principal Software Engineer姜宁，请教了一些Apache禁忌事项，重新活跃起来了捐赠进程。接下来，最重要的是征集champion候选人，很开心的是ActiveMQ VP Bruce爽快地接收了我们的邀请，经过前前后后接近100封邮件来往，我们终于正式开启了Apache之旅。捐赠投票是在双十一当天，我们准备充分很好地回答了评委会的犀利问题。不过，面对“中国开发者不喜欢邮件沟通”突然刁难，还要感谢社区华人的防御性声明回应。经过很多磨难，投票结果总算出来了：还不算坏10票赞同，带binding（IPMC成员的有效投票）的+1，无反对票，正式进入孵化期。孵化成功后有望成为国内首个互联网中间件在Apache上的顶级项目，成为全球继ActiveMQ，Kafka之后，分布式消息引擎家族中的重要成员。
-
->接下来，我们想强调下知识产权这个对大多数工程师来说陌生的领域，尤其是专利权、著作权、商标权。在国外，每年因为这些问题导致的侵权官司不在少数。而我们在开源之初，对这块的选择、保护也是极其谨慎，包括开源许可协议的选择、授权方面，代码署名权等，这些都是很好的智力保护，也是我们产品的核心竞争力之一。尊重知识，尊重产权，才能构建一个和谐积极向上的开源氛围，打造真正的自主知识产权品牌产品。
-
->在Alibaba，我们基于开源引擎的RocketMQ，为云上用户提供了商业化版本的Aliware MQ。两个产品都是由阿里中间件消息团队出品。商业版Aliware MQ 在支持 TCP 、HTTP 和MQTT 协议接入，功能方面增强了运维管控方面，生态集成的能力（包括可视化的消息轨迹、资源报表统计以及监控报警、Kafka集成等）。它在公有云上本身具备多机房部署同城高可用容灾特性，目的是满足企业级要求。
-
->关于社区的运营，我们采取了和Apache顶级项目基本相似的策略。首先，必须立足于高质量产品本身，从版本规划开始，我们建立了里程碑讨论，Features设计，编码自测，结对Review，集成测试，Release讨论，Release公告等等一系列规范且高效的软件研发流程。其次，在社区运营层面，则有一系列与社区互动的活动，如线下meetup、workshop、ApacheCon、不定期的编程马拉松等，吸纳新的Contributor和Committer进来。
- 
-
-## 使用企业
-除了阿里巴巴集团，Apache RocketMQ还被滴滴出行，SF Express，WeBank，北京大学和中国科学院等数百家公司和研究/教育机构使用。
+现今，Apache RocketMQ在社区各方面的努力下，茁壮发展，很多功能都得到了加强。
 
 ## RocketMQ的技术概览
 在我们看来，它最大的创新点在于能够通过精巧的横向、纵向扩展，不断满足与日俱增的海量消息在高吞吐、高可靠、低延迟方面的要求。
@@ -67,48 +30,25 @@ Producer由用户进行分布式部署，消息由Producer通过多种负载均�
 Consumer也由用户部署，支持PUSH和PULL两种消费模式，支持集群消费和广播消息，提供实时的消息订阅机制，满足大多数消费场景。
 
 ## 特点
-RocketMQ具有很多优秀的性能，尤其适应那些需要严格事务运用的场合。下面通过几个方面进行介绍。
-
-> ~~注：因为RocketMQ和Kafka有着一定的渊源，而且Kafka也是目前运用较为广泛的，所以我们在讲述时K有时需要用Kafka作为对比，来更好的帮助读者了解RocketMQ。~~
-
-### 数据可靠性
-RocketMQ支持异步实时刷盘，同步刷盘，同步复制，异步复制。具有高可靠性。不会因为操作系统的崩溃而导致数据丢失。
-
-### 性能
-~~RocketMQ单机写入TPS单实例约7万条/秒，单机部署3个Broker，可以跑到最高12万条/秒，消息大小10个字节
-低于Kafka的百万条/秒。但是RocketMQ在队列数上有很大提升。Kafka在64个队列以上就会明显增加响应时间，RocketMQ单机最高支持5万个队列，且负载不会发生明显变化。~~
-
-RocketMQ经过一系列的实践和优化，处理速度从最初的10,000TPS到目前已经超过50,000TPS。单纯比较TPS的话虽然还不如Kafka的百万级别，但在支持事务的消息中间件来说已经是非常优秀了。
-
-### 消息投递实时性
-RocketMQ采用长轮询，消息投递延迟通常在几个毫秒左右。
-Kafka0.8版本后也支持长轮询了。
+* RocketMQ支持异步实时刷盘，同步刷盘，同步复制，异步复制。具有高可靠性。不会因为操作系统的崩溃而导致数据丢失。
+* RocketMQ经过一系列的实践和优化，处理速度从最初的10,000TPS到目前已经超过50,000TPS。单纯比较TPS的话虽然还不如Kafka的百万级别，但在支持事务的消息中间件来说已经是非常优秀了。
+* RocketMQ采用长轮询，消息投递延迟通常在几个毫秒左右。
+* RocketMQ单机最高支持5万个队列，且负载不会发生明显递增。
+* RocketMQ支持消费失败重试，这个特性非常适合运用在充值方面的应用。
+* RocketMQ支持严格的意义上的消息顺序。即时在一台Broker宕机后，消息发送会失败，但是不会乱序。
+* RocketMQ支持定时消息
+* RocketMQ支持分布式事务消息
+* RocketMQ支持根据消息标识或内容查询。
+* RocketMQ支持按照时间来回溯消息，精度毫秒，例如从一天之前的某时某分某秒开始重新消费消息。
 
 
-### 支持的队列数
-RocketMQ单机最高支持5万个队列，且负载不会发生明显递增。
+## 其他消息中间件
 
-### 消费失败重试
-RocketMQ支持消费失败重试，这个特性非常适合运用在充值方面的应用。
-Kafka则不支持。
+RabbitMQ是AMQP规范的参考实现，AMQP是一个线路层协议，面面俱到，很系统，也稍显复杂。目前RabbitMQ已经成为OpenStack Iaas平台首选的消息服务，其背后的支持力度不言而喻。
 
-### 严格的消息顺序
-RocketMQ支持严格的意义上的消息顺序。即时在一台Broker宕机后，消息发送会失败，但是不会乱序。
+ActiveMQ最初主要的开发者在LogicBlaze，现在主要开发红帽，是JMS规范的参考实现，也是Apache旗下的老牌消息服务引擎。JMS虽说是一个API级别的协议，但其内部还是定义了一些实现约束，不过缺少多语言支撑。ActiveMQ的生态堪称丰富多彩，在该Apache顶级项目下，拥有不少子项目，包括由HornetMQ演变而来的Artemis，基于Scala号称下一代AMQ的Apollo等。
 
-### 定时消息
-RocketMQ支持定时消息
-
-### 分布式事务消息
-RocketMQ支持定时消息
-
-### 消息查询
-RocketMQ支持根据消息标识或内容查询。
-
-### 消息回溯
-RocketMQ支持按照时间来回溯消息，精度毫秒，例如从一天之前的某时某分某秒开始重新消费消息。
-
-
-## RocketMQ与ActiveMQ与Kafka
+而Kafka最初被设计用来做日志处理，是一个不折不扣的大数据通道，追求高吞吐，存在丢消息的可能。其背后的研发团队也围绕着Kafka进行了商业包装，目前在一些中小型公司被广泛使用。
 
 下表是一目了然的快速参考，可快速发现RocketMQ及其最受欢迎的替代产品之间的差异。
 
