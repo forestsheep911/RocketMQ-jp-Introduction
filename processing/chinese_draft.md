@@ -9,7 +9,7 @@ RocketMQ起源于阿里巴巴。阿里巴巴最初由于业务需求，需要使
 ## 里程碑
 2012年，阿里巴巴开始开发RocketMQ，经历了数次双11核心交易链路检验。
 
-2016年11月11日，Rocket又一次在阿里巴巴全球购物节上处理了1.2万亿个并发在线消息传输，随后阿里巴巴将RocketMQ捐献给Apache Incubator。
+2016年11月11日，RocketMQ又一次在阿里巴巴全球购物节上处理了1.2万亿个并发在线消息传输，随后阿里巴巴将RocketMQ捐献给Apache Incubator。
 
 2017年9月25日 – Apache软件基金会，连同350多个开源项目的全体志愿者、开发人员、管理人员、和孵化项目组织，宣布Apache®RocketMQ™从Apache孵化器毕业成为顶级项目，这表明该项目的社区和产品已根据ASF的精英流程和原则得到了很好的管理。[参见](https://blogs.apache.org/foundation/entry/the-apache-software-foundation-announces18)
 

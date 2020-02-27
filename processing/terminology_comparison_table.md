@@ -9,3 +9,6 @@
 | Long Polling                | 长轮询   | Long polling  |
 | Order Message               | 消息顺序  | 順序メッセージ       |
 | Message Trace               | 消息回溯  | Message Trace |
+| TianMao double eleven       | 天猫双11购物节  |「天猫ダブルイレブン」ショッピングフェスティバル |
+| concurrency                 | 并发  | 並行性 |
+|                             | 分布式  |  |
